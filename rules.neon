@@ -1,0 +1,23 @@
+parametersSchema:
+		docblock: structure([
+			copyrightIdentifier: schema(string(), nullable())
+			requiredLicenseIdentifier: schema(string(), nullable())
+		])
+
+rules:
+	- Mteu\DocBlockRules\Rules\RequireCopyrightInformationInFirstCommentRule
+	- Mteu\DocBlockRules\Rules\RequireLicenseInformationInFirstCommentRule
+
+services:
+	-
+		class: Mteu\DocBlockRules\Rules\RequireCopyrightInformationInFirstCommentRule
+		arguments:
+			copyrightIdentifier: %docblock.copyrightIdentifier%
+		tags:
+				- phpstan.rules.rule
+	-
+		class: Mteu\DocBlockRules\Rules\RequireLicenseInformationInFirstCommentRule
+		arguments:
+			requiredLicenseIdentifier: %docblock.requiredLicenseIdentifier%
+		tags:
+			- phpstan.rules.rule

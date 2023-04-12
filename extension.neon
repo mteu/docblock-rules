@@ -1,0 +1,9 @@
+includes:
+		- rules.neon
+
+parameters:
+		docblock:
+				# Assign a copyright phrase that needs to be present in each PHP file.
+				copyrightIdentifier: 'Copyright (C)'
+				# Select a pre-defined license with 'GPL-2.0' or 'GPL-3.0' or assign a custom string that should be looked for.
+				requiredLicenseIdentifier: 'GPL-3.0'
