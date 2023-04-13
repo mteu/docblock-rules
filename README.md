@@ -17,7 +17,7 @@ Require this package and make sure to configure PHPStan according to your needs 
 (e.g. as `phpstan.neon` file in your package root.)
 
 ```bash
-composer require mteu/docblock-rules --dev
+composer require --dev mteu/docblock-rules
 ```
 
 If you're using the [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer) you're good to go.
