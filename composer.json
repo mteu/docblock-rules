@@ -18,13 +18,19 @@
     },
     "require-dev": {
         "armin/editorconfig-cli": "^1.5",
-        "ergebnis/composer-normalize": "^2.29"
+        "ergebnis/composer-normalize": "^2.29",
+        "phpunit/phpunit": "^10.2"
     },
     "autoload": {
         "psr-4": {
             "Mteu\\DocBlockRules\\": "src/"
         }
     },
+	"autoload-dev": {
+		"psr-4": {
+			"Mteu\\DocBlockRules\\Tests\\": "tests/"
+		}
+	},
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
@@ -55,6 +61,8 @@
         ],
         "sca:php": [
             "phpstan analyse -c phpstan.php"
-        ]
+        ],
+		"test:unit": "phpunit -c phpunit.xml",
+		"test:unit:coverage": "phpunit -c phpunit.coverage.xml"
     }
 }

@@ -14,7 +14,7 @@ services:
 		arguments:
 			copyrightIdentifier: %docblock.copyrightIdentifier%
 		tags:
-				- phpstan.rules.rule
+			- phpstan.rules.rule
 	-
 		class: Mteu\DocBlockRules\Rules\RequireLicenseInformationInFirstCommentRule
 		arguments:

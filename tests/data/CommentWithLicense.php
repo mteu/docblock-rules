@@ -5,8 +5,6 @@ declare(strict_types=1);
 /*
  * This file is part of the PHPStan extension "mteu/docblock-rules".
  *
- * Copyright (C) 2023 Martin Adler <mteu@mailbox.org>
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,27 +19,9 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-return [
-    'includes' => [
-        'rules.neon',
-    ],
-    'parameters' => [
-        'level' => 'max',
-        'paths' => [
-            'src',
-            'tests',
-        ],
-        'excludePaths' => [
-            'analyseAndScan' => [
-                'tests/data/*'
-            ],
-        ],
-        'ignoreErrors' => [
-            '#^Constructor in [a-zA-Z0-9-_\\\\]+ has parameter [\\$a-zA-Z0-9_-]+ with default value.$#',
-        ],
-        'docblock' => [
-            'copyrightIdentifier' => 'Copyright (C) 20',
-            'requiredLicenseIdentifier' => 'GPL-3.0',
-        ],
-    ],
-];
+namespace Mteu\DocBlockRules\Tests\data;
+
+class CommentWithLicense
+{
+
+}
