@@ -2,6 +2,7 @@
 
 [![PHP Version Require](http://poser.pugx.org/mteu/docblock-rules/require/php)](https://packagist.org/packages/mteu/docblock-rules)
 [![CGL](https://github.com/mteu/docblock-rules/actions/workflows/cgl.yaml/badge.svg)](https://github.com/mteu/docblock-rules/actions/workflows/cgl.yaml)
+[![Tests](https://github.com/mteu/docblock-rules/actions/workflows/tests.yaml/badge.svg)](https://github.com/mteu/docblock-rules/actions/workflows/tests.yaml)
 [![Latest Stable Version](http://poser.pugx.org/mteu/docblock-rules/v)](https://packagist.org/packages/mteu/docblock-rules)
 [![License](http://poser.pugx.org/mteu/docblock-rules/license)](https://packagist.org/packages/mteu/docblock-rules)
 
