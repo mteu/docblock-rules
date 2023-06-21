@@ -23,23 +23,21 @@ declare(strict_types=1);
 
 namespace Mteu\DocBlockRules\Tests\Rules;
 
-use Mteu\DocBlockRules\Rules\RequireCopyrightInformationInFirstCommentRule;
+use Mteu\DocBlockRules\Rules\RequireLicenseInformationInFirstCommentRule;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
 /**
- * @extends RuleTestCase<RequireCopyrightInformationInFirstCommentRule>
+ * @extends RuleTestCase<RequireLicenseInformationInFirstCommentRule>
  */
-final class RequireCopyrightInformationInFirstCommentRuleTest extends RuleTestCase
+final class RequireLicenseInformationInFirstCommentRuleTest extends RuleTestCase
 {
 
-    private const COPYRIGHT_IDENTIFIER = 'Copyright (C)';
+    private const REQUIRED_LICENSE_IDENTIFIER = 'GPL-3.0';
 
-    /**
-     */
     protected function getRule(): Rule
     {
-        return new RequireCopyrightInformationInFirstCommentRule(self::COPYRIGHT_IDENTIFIER);
+        return new RequireLicenseInformationInFirstCommentRule(self::REQUIRED_LICENSE_IDENTIFIER);
     }
 
     /** @return string[] */
@@ -51,21 +49,13 @@ final class RequireCopyrightInformationInFirstCommentRuleTest extends RuleTestCa
     public function testRule(): void
     {
         $this->analyse(
-            [
-                __DIR__ . '/../data/CommentWithoutCopyrightOrLicense.php'
-            ],
+            [__DIR__ . '/../data/CommentWithCopyright.php'],
             [
                 [
-                    'File is missing the configured copyright notice in the PHPDoc comment block.', 7
-                ],
-            ]
-        );
-
-        $this->analyse(
-            [__DIR__ . '/../data/CommentWithLicense.php'],
-            [
-                [
-                    'File is missing the configured copyright notice in the PHPDoc comment block.', 22
+                    sprintf(
+                        'File does not include a \'%s\' license.',
+                        self::REQUIRED_LICENSE_IDENTIFIER,
+                    ), 9
                 ],
             ]
         );
@@ -76,7 +66,7 @@ final class RequireCopyrightInformationInFirstCommentRuleTest extends RuleTestCa
             ],
             [
                 [
-                    'File is missing a PHPDoc comment block that could contain a copyright notice.', 5
+                    'File is missing a PHPDoc comment block that could contain license information.', 5
                 ],
             ]
         );
