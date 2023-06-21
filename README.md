@@ -37,8 +37,9 @@ identified by a needle string in the PHPStan configuration.
 ```neon
 # phpstan.neon
 
-docblock:
-  copyrightIdentifier: 'Copyright (C) 2023'
+parameters:
+    docblock:
+        copyrightIdentifier: 'Copyright (C) 2023'
 ```
 
 ### [`RequireLicenseInformationInFirstCommentRule`](src/Rules/RequireLicenseInformationInFirstCommentRule.php)
@@ -49,10 +50,11 @@ can use pre-defined license checks values or define a custom string that is bein
 ```neon
 # phpstan.neon
 
-docblock:
-    # Pre-configured checks when applying 'GPL-2.0' or 'GPL-3.0' as value.
-    # Alternatively, use a custom string to look for in the file.
-    requiredLicenseIdentifier: 'GPL-3.0'
+parameters:
+    docblock:
+        # Pre-configured checks when applying 'GPL-2.0' or 'GPL-3.0' as value.
+        # Alternatively, use a custom string to look for in the file.
+        requiredLicenseIdentifier: 'GPL-3.0'
 ```
 
 ## 💛 Acknowledgement
