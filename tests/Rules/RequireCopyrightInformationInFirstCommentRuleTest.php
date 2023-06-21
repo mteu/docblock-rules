@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace Mteu\DocBlockRules\Tests\Rules;
 
+use Mteu\DocBlockRules\Rules\RequireCopyrightInformationInFirstCommentRule;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
@@ -33,11 +34,10 @@ class RequireCopyrightInformationInFirstCommentRuleTest extends RuleTestCase
 {
 
     /**
-     * @throws \PHPStan\DependencyInjection\ParameterNotFoundException
      */
     protected function getRule(): Rule
     {
-        return new \Mteu\DocBlockRules\Rules\RequireCopyrightInformationInFirstCommentRule('GPL 2.0');
+        return new RequireCopyrightInformationInFirstCommentRule('Copyright (C)');
     }
 
     /** @return string[] */
