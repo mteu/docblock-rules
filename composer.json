@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "armin/editorconfig-cli": "^1.5",
-        "ergebnis/composer-normalize": "^2.29",
+        "ergebnis/composer-normalize": "^2.37",
         "phpunit/phpunit": "^10.3"
     },
     "autoload": {
