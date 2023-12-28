@@ -36,9 +36,6 @@ return [
                 'tests/data/*'
             ],
         ],
-        'ignoreErrors' => [
-            '#^Constructor in [a-zA-Z0-9-_\\\\]+ has parameter [\\$a-zA-Z0-9_-]+ with default value.$#',
-        ],
         'docblock' => [
             'copyrightIdentifier' => 'Copyright (C) 20',
             'requiredLicenseIdentifier' => 'GPL-3.0',
