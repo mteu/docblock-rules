@@ -6,4 +6,9 @@
       <directory>tests/Rules</directory>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory suffix=".php">tests/Rules</directory>
+    </include>
+  </source>
 </phpunit>
