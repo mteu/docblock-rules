@@ -40,3 +40,11 @@ jobs:
         run: composer lint:composer
       - name: Lint .editorconfig
         run: composer lint:editorconfig
+
+      # SCA
+      - name: SCA PHP
+        run: composer sca:php -- --error-format github
+
+      # Migration
+      - name: Migration
+        run: composer sca:migrate --dry-run

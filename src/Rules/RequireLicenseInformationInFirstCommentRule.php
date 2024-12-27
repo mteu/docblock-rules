@@ -28,11 +28,14 @@ use PhpParser\Node\Stmt\Namespace_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Mteu\DocBlockRules\Enum\License;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 
 /**
  * @implements Rule<Node\Stmt>
  */
-final class RequireLicenseInformationInFirstCommentRule implements Rule
+final readonly class RequireLicenseInformationInFirstCommentRule implements Rule
 {
     // Update to Enum field reference in constant expression with PHP 8.2 support
     private const SUPPORTED_LICENSES = [
@@ -41,7 +44,7 @@ final class RequireLicenseInformationInFirstCommentRule implements Rule
     ];
 
     public function __construct(
-        private readonly string $requiredLicenseIdentifier = '',
+        private string $requiredLicenseIdentifier = '',
     ) {
     }
 
@@ -53,6 +56,10 @@ final class RequireLicenseInformationInFirstCommentRule implements Rule
         return Namespace_::class;
     }
 
+    /**
+     * @return (string|RuleError)[]
+     * @throws ShouldNotHappenException
+     */
     public function processNode(Node $node, Scope $scope): array
     {
         $comments = $node->getComments();
@@ -63,16 +70,20 @@ final class RequireLicenseInformationInFirstCommentRule implements Rule
 
         if (null === $firstComment) {
             return [
-                'File is missing a PHPDoc comment block that could contain license information.',
+                RuleErrorBuilder::message(
+                    'File is missing a PHPDoc comment block that could contain license information.',
+                )->build(),
             ];
         }
 
-        if (false === strpos($firstComment->getText(), $licenseText)) {
+        if (!str_contains($firstComment->getText(), $licenseText)) {
             return [
-                sprintf(
+                RuleErrorBuilder::message(
+                    sprintf(
                     'File does not include a \'%s\' license.',
-                    $this->requiredLicenseIdentifier,
-                ),
+                        $this->requiredLicenseIdentifier,
+                    ),
+                )->build(),
             ];
         }
 
