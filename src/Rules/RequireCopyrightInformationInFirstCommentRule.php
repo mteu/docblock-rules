@@ -30,10 +30,10 @@ use PHPStan\Rules\Rule;
 /**
  * @implements Rule<Node\Stmt>
  */
-final class RequireCopyrightInformationInFirstCommentRule implements Rule
+final readonly class RequireCopyrightInformationInFirstCommentRule implements Rule
 {
     public function __construct(
-        private readonly string $copyrightIdentifier = '',
+        private string $copyrightIdentifier = '',
     ) {
     }
 
@@ -56,7 +56,7 @@ final class RequireCopyrightInformationInFirstCommentRule implements Rule
             ];
         }
 
-        if (false === strpos($firstComment->getText(), $this->copyrightIdentifier)) {
+        if (!str_contains($firstComment->getText(), $this->copyrightIdentifier)) {
             return [
                 'File is missing the configured copyright notice in the PHPDoc comment block.',
         ];

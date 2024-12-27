@@ -32,7 +32,7 @@ use Mteu\DocBlockRules\Enum\License;
 /**
  * @implements Rule<Node\Stmt>
  */
-final class RequireLicenseInformationInFirstCommentRule implements Rule
+final readonly class RequireLicenseInformationInFirstCommentRule implements Rule
 {
     // Update to Enum field reference in constant expression with PHP 8.2 support
     private const SUPPORTED_LICENSES = [
@@ -41,7 +41,7 @@ final class RequireLicenseInformationInFirstCommentRule implements Rule
     ];
 
     public function __construct(
-        private readonly string $requiredLicenseIdentifier = '',
+        private string $requiredLicenseIdentifier = '',
     ) {
     }
 
@@ -67,7 +67,7 @@ final class RequireLicenseInformationInFirstCommentRule implements Rule
             ];
         }
 
-        if (false === strpos($firstComment->getText(), $licenseText)) {
+        if (!str_contains($firstComment->getText(), $licenseText)) {
             return [
                 sprintf(
                     'File does not include a \'%s\' license.',

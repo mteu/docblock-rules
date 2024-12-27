@@ -14,9 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ["8.1", "8.2", "8.3"]
-        composer-version: ["2.7"]
-        dependencies: ["locked", "highest", "lowest"]
+        php-version: ["8.2", "8.3", "8.4"]
+        composer-version: ["latest"]
+        dependencies: ["highest", "lowest"]
     steps:
       - uses: actions/checkout@v4
         with:
