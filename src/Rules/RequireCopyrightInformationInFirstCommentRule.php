@@ -25,7 +25,11 @@ namespace Mteu\DocBlockRules\Rules;
 
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 
 /**
  * @implements Rule<Node\Stmt>
@@ -45,6 +49,10 @@ final readonly class RequireCopyrightInformationInFirstCommentRule implements Ru
         return Node\Stmt\Namespace_::class;
     }
 
+    /**
+     * @return (string|RuleError)[]
+     * @throws ShouldNotHappenException
+     */
     public function processNode(Node $node, Scope $scope): array
     {
         $comments = $node->getComments();
@@ -52,14 +60,18 @@ final readonly class RequireCopyrightInformationInFirstCommentRule implements Ru
 
         if (null === $firstComment) {
             return [
-                'File is missing a PHPDoc comment block that could contain a copyright notice.',
+                RuleErrorBuilder::message(
+                    'File is missing a PHPDoc comment block that could contain a copyright notice.',
+                )->build(),
             ];
         }
 
         if (!str_contains($firstComment->getText(), $this->copyrightIdentifier)) {
             return [
-                'File is missing the configured copyright notice in the PHPDoc comment block.',
-        ];
+                RuleErrorBuilder::message(
+                    'File is missing the configured copyright notice in the PHPDoc comment block.',
+                )->build(),
+            ];
         }
 
         return [];

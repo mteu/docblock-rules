@@ -28,6 +28,9 @@ use PhpParser\Node\Stmt\Namespace_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Mteu\DocBlockRules\Enum\License;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 
 /**
  * @implements Rule<Node\Stmt>
@@ -53,6 +56,10 @@ final readonly class RequireLicenseInformationInFirstCommentRule implements Rule
         return Namespace_::class;
     }
 
+    /**
+     * @return (string|RuleError)[]
+     * @throws ShouldNotHappenException
+     */
     public function processNode(Node $node, Scope $scope): array
     {
         $comments = $node->getComments();
@@ -63,16 +70,20 @@ final readonly class RequireLicenseInformationInFirstCommentRule implements Rule
 
         if (null === $firstComment) {
             return [
-                'File is missing a PHPDoc comment block that could contain license information.',
+                RuleErrorBuilder::message(
+                    'File is missing a PHPDoc comment block that could contain license information.',
+                )->build(),
             ];
         }
 
         if (!str_contains($firstComment->getText(), $licenseText)) {
             return [
-                sprintf(
+                RuleErrorBuilder::message(
+                    sprintf(
                     'File does not include a \'%s\' license.',
-                    $this->requiredLicenseIdentifier,
-                ),
+                        $this->requiredLicenseIdentifier,
+                    ),
+                )->build(),
             ];
         }
 
